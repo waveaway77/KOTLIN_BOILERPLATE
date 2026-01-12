@@ -32,6 +32,8 @@ dependencies {
     implementation("io.github.oshai:kotlin-logging-jvm:6.0.3")
 //    implementation("jakarta.transaction:jakarta.transaction-api:2.0.1")
     implementation("org.apache.tomcat.embed:tomcat-embed-core:10.1.44")
+    implementation("org.aspectj:aspectjweaver:1.9.24")
+
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
