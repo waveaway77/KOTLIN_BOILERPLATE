@@ -33,6 +33,8 @@ dependencies {
 //    implementation("jakarta.transaction:jakarta.transaction-api:2.0.1")
     implementation("org.apache.tomcat.embed:tomcat-embed-core:10.1.44")
     implementation("org.aspectj:aspectjweaver:1.9.24")
+    implementation("io.micrometer:micrometer-registry-prometheus")
+    implementation("io.micrometer:context-propagation:1.1.1")
 
     developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 
