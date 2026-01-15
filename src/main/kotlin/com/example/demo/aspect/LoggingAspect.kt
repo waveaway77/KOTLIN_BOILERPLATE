@@ -44,12 +44,12 @@ class LoggingAspect {
             pjp.args
         )
 
-        if (log.isInfoEnabled()) { log.info("$className.$methodName args=$argString") }
+        if (log.isInfoEnabled()) { log.info { "$className.$methodName args=$argString" } } // logmessage here
 
         val start = System.currentTimeMillis()
         val result = pjp.proceed()
         val took = System.currentTimeMillis() - start
-        if (log.isInfoEnabled()) { log.info {"$className.$methodName took=${took}ms result=${stringify(result)}"} }
+        if (log.isInfoEnabled()) { log.info { "$className.$methodName took=${took}ms result=${stringify(result)}" } } // logmessage here
 
         return result
     }
