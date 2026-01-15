@@ -36,7 +36,7 @@ dependencies {
     implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("io.micrometer:context-propagation:1.1.1")
 
-    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
+    developmentOnly("org.springframework.boot:spring-boot-docker-compose") // 특히 docker-compose 플러그인은: bootRun 전에 composeUp을 자동으로 걸어두는 경우가 많다
 
 //    runtimeOnly("com.mysql:mysql-connector-j")
 
