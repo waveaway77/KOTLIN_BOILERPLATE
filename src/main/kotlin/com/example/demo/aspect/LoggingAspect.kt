@@ -22,10 +22,10 @@ import kotlin.reflect.jvm.kotlinFunction
 class LoggingAspect {
     private val log = KotlinLogging.logger {}
 
-    @Pointcut("within(com.example.demo..controller..*)")
+    @Pointcut("bean(*Controller)")
     fun controllerLayer() {}
 
-    @Pointcut("within(com.example.demo..service..*)")
+    @Pointcut("bean(*Service)")
     fun serviceLayer() {}
 
     @Pointcut("""within(@org.springframework.web.bind.annotation.RestControllerAdvice *)""")
@@ -33,6 +33,7 @@ class LoggingAspect {
 
     @Around("controllerLayer() || serviceLayer()")
     fun controller(pjp: ProceedingJoinPoint): Any? {
+
         val sig = pjp.signature as MethodSignature
         val method = sig.method
         val className = method.declaringClass.simpleName
