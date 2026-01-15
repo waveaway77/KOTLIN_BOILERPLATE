@@ -21,7 +21,7 @@ class SecurityConfig {
     ): SecurityWebFilterChain? {
         val httpSecurity = http
             .authorizeExchange {
-                it.anyExchange().authenticated()
+                it.Access().permitAll()
             }
             .cors { corsConfiguration() } // If you’re using a frontend SPA, enabling CORS is essential: Due to Single-origin
             .sessionManagement { SessionCreationPolicy.STATELESS } // If you use JWT or Basic Authentication, you often set the session to stateless, meaning no session token is managed:
