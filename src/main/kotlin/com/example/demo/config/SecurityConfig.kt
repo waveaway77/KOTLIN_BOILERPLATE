@@ -1,5 +1,6 @@
 package com.example.demo.config
 
+import org.springframework.boot.security.autoconfigure.actuate.web.reactive.EndpointRequest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
@@ -21,7 +22,7 @@ class SecurityConfig {
     ): SecurityWebFilterChain? {
         val httpSecurity = http
             .authorizeExchange {
-                it.Access().permitAll()
+                it.pathMatchers("/**").permitAll()
             }
             .cors { corsConfiguration() } // If you’re using a frontend SPA, enabling CORS is essential: Due to Single-origin
             .sessionManagement { SessionCreationPolicy.STATELESS } // If you use JWT or Basic Authentication, you often set the session to stateless, meaning no session token is managed:
