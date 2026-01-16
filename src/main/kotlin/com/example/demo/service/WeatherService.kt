@@ -10,14 +10,14 @@ class WeatherService(
     val validationService: ValidationService,
     val apiClient: ApiClient
 ) {
-    suspend fun getWeather(request: WeatherRequest): WeatherResponse {
+    suspend fun getWeather(request: WeatherRequest): String {
         val validRequest = validationService.validateCheck(request)
         return apiClient.get(
             baseUrl = "https://api.open-meteo.com/v1",
             endpoint = "/forecast",
             requestParams = emptyMap(),
             headers = emptyMap(),
-            responseType = WeatherResponse::class.java,
+            responseType = String::class.java,
         )
     }
 }

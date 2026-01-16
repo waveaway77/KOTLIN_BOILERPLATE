@@ -15,7 +15,7 @@ https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=tem
 class WeatherController(
     private val weatherService: WeatherService
 ) {
-    @GetMapping("/forecast")
+    @PostMapping("/forecast")
     suspend fun getWheather(
         @RequestBody request: WeatherRequest
     ) {

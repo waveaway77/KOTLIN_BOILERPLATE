@@ -1,6 +1,6 @@
 package com.example.demo.client
 
-import kotlinx.coroutines.reactive.awaitFirst
+import kotlinx.coroutines.reactive.awaitSingle
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
@@ -17,12 +17,12 @@ class ApiClient(
         responseType: Class<T>,
     ): T {
         val response = webClient.get()
-            .uri(baseUrl, endpoint)
+            .uri(baseUrl+endpoint)
             .accept(MediaType.APPLICATION_JSON)
             .headers { headers }
             .retrieve()
             .bodyToMono(responseType)
-            .awaitFirst()
+            .awaitSingle()
 
         return response
     }
