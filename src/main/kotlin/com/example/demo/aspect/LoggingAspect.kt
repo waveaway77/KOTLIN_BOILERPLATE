@@ -28,9 +28,6 @@ class LoggingAspect {
     @Pointcut("bean(*Service)")
     fun serviceLayer() {}
 
-    @Pointcut("""within(@org.springframework.web.bind.annotation.RestControllerAdvice *)""")
-    fun exceptionLayer() {}
-
     @Around("controllerLayer() || serviceLayer()")
     fun controller(pjp: ProceedingJoinPoint): Any? {
 
@@ -53,28 +50,6 @@ class LoggingAspect {
         if (log.isInfoEnabled()) { log.info { "$className.$methodName took=${took}ms result=${stringify(result)}" } } // logmessage here
 
         return result
-    }
-
-    @Around("exceptionLayer()")
-    fun exception(pjp: ProceedingJoinPoint): Any? {
-        val sig = pjp.signature as MethodSignature
-        val method = sig.method
-        val className = method.declaringClass.simpleName
-        val methodName = method.name
-
-        val argString = buildArgsString(
-            sig.parameterNames,
-            pjp.args
-        )
-
-        log.error { "Enter ExceptonHandler: $className.$methodName args=$argString" }
-        return try {
-            val result = pjp.proceed()
-            log.error { "Exit ExceptHandler: $className.$methodName -> result=${result?.javaClass?.simpleName}" }
-        } catch (e: Throwable) {
-            log.error { "Handler $className.$methodName failed after" }
-            throw e
-        }
     }
 
     private fun buildArgsString(names: Array<String>?, args: Array<Any?>): String {
