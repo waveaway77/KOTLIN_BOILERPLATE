@@ -1,9 +1,12 @@
 package com.example.demo.controller
 
 import com.example.demo.dto.WeatherRequest
+import com.example.demo.dto.WeatherResponse
 import com.example.demo.service.WeatherService
 import io.github.oshai.kotlinlogging.KotlinLogging
 import org.slf4j.LoggerFactory
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 /*
@@ -16,16 +19,17 @@ class WeatherController(
     private val weatherService: WeatherService
 ) {
     @PostMapping("/forecast")
-    suspend fun getWheather(
-        @RequestBody request: WeatherRequest
-    ) {
-        println("==== controller called ====")
+    suspend fun getWheather(@RequestBody request: WeatherRequest): ResponseEntity<*> {
+//        println("==== controller called ====")
+//
+//        val log2 = LoggerFactory.getLogger("TEST")
+//        log2.info("SLF4J TEST LOG")
+//
+//        val log = KotlinLogging.logger {}
+//        log.info { "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" }
 
-        val log2 = LoggerFactory.getLogger("TEST")
-        log2.info("SLF4J TEST LOG")
+        val response = weatherService.getWeather(request)
 
-        val log = KotlinLogging.logger {}
-        log.info { "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" }
-        weatherService.getWeather(request)
+        return ResponseEntity(response, HttpStatus.OK)
     }
 }
