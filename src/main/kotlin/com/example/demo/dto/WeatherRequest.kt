@@ -1,3 +1,5 @@
 package com.example.demo.dto
 
-class WeatherRequest
+data class WeatherRequest(
+    val name: String? = "",
+)
