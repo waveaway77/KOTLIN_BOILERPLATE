@@ -30,24 +30,22 @@ class LoggingAspect {
 
     @Around("controllerLayer() || serviceLayer()")
     fun controller(pjp: ProceedingJoinPoint): Any? {
-
         val sig = pjp.signature as MethodSignature
-        val method = sig.method
-        val className = method.declaringClass.simpleName
-        val methodName = method.name
-        val kfun = method.kotlinFunction
+        val className = sig.method.declaringClass.simpleName
+        val methodName = sig.method.name
+        val kfun = sig.method.kotlinFunction
 
         val argString = buildArgsString(
             sig.parameterNames,
             pjp.args
         )
 
-        if (log.isInfoEnabled()) { log.info { "$className.$methodName args=$argString" } } // logmessage here
+        if (log.isInfoEnabled()) { log.info { "[$className.$methodName] $argString" } }
 
         val start = System.currentTimeMillis()
         val result = pjp.proceed()
         val took = System.currentTimeMillis() - start
-        if (log.isInfoEnabled()) { log.info { "$className.$methodName took=${took}ms result=${stringify(result)}" } } // logmessage here
+        if (log.isInfoEnabled()) { log.info { "[$className.$methodName] took=${took}ms result=${stringify(result)}" } }
 
         return result
     }
@@ -62,7 +60,7 @@ class LoggingAspect {
             if (shouldSkip(v)) continue
 
 //            val masked = MaskingUtils.toMaksedLog(v)
-            val masked = ""
+            val masked = v
 
             if (sb.isNotEmpty()) sb.append(", ")
             sb.append("$name=").append(masked)
@@ -72,6 +70,7 @@ class LoggingAspect {
 
     private fun shouldSkip(v: Any?): Boolean = when (v) {
         null -> false
+        is kotlin.coroutines.Continuation<*> -> true
         is HttpServletRequest, is HttpServletResponse,
         is MultipartFile, is Array<*>,
         is BindingResult -> true
