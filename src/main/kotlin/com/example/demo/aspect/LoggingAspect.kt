@@ -59,11 +59,8 @@ class LoggingAspect {
             val v  = args[i]
             if (shouldSkip(v)) continue
 
-//            val masked = MaskingUtils.toMaksedLog(v)
-            val masked = v
-
             if (sb.isNotEmpty()) sb.append(", ")
-            sb.append("$name=").append(masked)
+            sb.append("$name=").append(v)
         }
         return sb.toString()
     }
