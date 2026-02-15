@@ -5,8 +5,8 @@ import org.springframework.core.Ordered
 import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 import io.github.oshai.kotlinlogging.KotlinLogging
-import jakarta.servlet.http.HttpServletRequest
-import jakarta.servlet.http.HttpServletResponse
+//import jakarta.servlet.http.HttpServletRequest
+//import jakarta.servlet.http.HttpServletResponse
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Pointcut
@@ -68,7 +68,7 @@ class LoggingAspect {
     private fun shouldSkip(v: Any?): Boolean = when (v) {
         null -> false
         is kotlin.coroutines.Continuation<*> -> true
-        is HttpServletRequest, is HttpServletResponse,
+//        is HttpServletRequest, is HttpServletResponse,
         is MultipartFile, is Array<*>,
         is BindingResult -> true
 

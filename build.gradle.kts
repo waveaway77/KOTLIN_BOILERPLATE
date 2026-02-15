@@ -23,18 +23,20 @@ repositories {
 dependencies {
 //    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 //    implementation("org.springframework.boot:spring-boot-starter-mongodb")
+    implementation("org.springframework.boot:spring-boot-starter-webflux") // logback-classic, slf4j-api 포함
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("tools.jackson.module:jackson-module-kotlin")
     implementation("io.github.oshai:kotlin-logging-jvm:6.0.3")
 //    implementation("jakarta.transaction:jakarta.transaction-api:2.0.1")
-    implementation("org.apache.tomcat.embed:tomcat-embed-core:10.1.44")
-    implementation("org.aspectj:aspectjweaver:1.9.24")
+    implementation("org.apache.tomcat.embed:tomcat-embed-core")
+    implementation("org.aspectj:aspectjweaver")
     implementation("io.micrometer:micrometer-registry-prometheus")
-    implementation("io.micrometer:context-propagation:1.1.1")
+    implementation("io.micrometer:context-propagation")
 
     developmentOnly("org.springframework.boot:spring-boot-docker-compose") // 특히 docker-compose 플러그인은: bootRun 전에 composeUp을 자동으로 걸어두는 경우가 많다
 
