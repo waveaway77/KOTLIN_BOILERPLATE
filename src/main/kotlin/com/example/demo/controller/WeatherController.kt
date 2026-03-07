@@ -20,14 +20,6 @@ class WeatherController(
 ) {
     @PostMapping("/forecast")
     suspend fun getWheather(@RequestBody request: WeatherRequest): ResponseEntity<*> {
-//        println("==== controller called ====")
-//
-//        val log2 = LoggerFactory.getLogger("TEST")
-//        log2.info("SLF4J TEST LOG")
-//
-//        val log = KotlinLogging.logger {}
-//        log.info { "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" }
-
         val response = weatherService.getWeather(request)
 
         return ResponseEntity(response, HttpStatus.OK)

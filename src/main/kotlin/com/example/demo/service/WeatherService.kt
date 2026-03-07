@@ -14,8 +14,7 @@ class WeatherService(
     private val log = LogManager.getLogger()
 
     suspend fun getWeather(request: WeatherRequest): WeatherResponse {
-        log.info("hello log")
-        println("MDC = ${org.slf4j.MDC.getCopyOfContextMap()}")
+        println("MDC = ${org.slf4j.MDC.getCopyOfContextMap()}") // MDC = {traceId=69915fe0eee8350ea1cab5b94bc29279, spanId=59c33a4b82c71934}
 
         val validRequest = validationService.validateCheck(request)
         return apiClient.get(
